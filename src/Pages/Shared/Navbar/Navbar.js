@@ -19,7 +19,7 @@ const Navbar = () => {
     </React.Fragment>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -49,12 +49,12 @@ const Navbar = () => {
           Cars Home
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">{menuItems}</ul>
+      <div className="navbar-end  hidden lg:flex ">
+        <ul className="menu menu-horizontal  p-0">{menuItems}</ul>
       </div>
-      <div className="navbar-end">
+      {/* <div className="navbar-end">
         <a className="btn">Get started</a>
-      </div>
+      </div> */}
     </div>
   );
 };

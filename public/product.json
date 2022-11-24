@@ -1,0 +1,94 @@
+[{
+    "_id": "637f16050d4e446bc1ed91d1",
+    "productId": 1,
+    "picture": "https://i.ibb.co/KWGYrsg/bmw-logo.jpg",
+    "name": "BMW",
+    "product": [{
+            "productName": "BMW X7",
+            "picture": "https://i.ibb.co/j8h3ymz/x7.jpg",
+            "location": "Dhaka",
+            "resalePrice": 10000,
+            "orginalPrice": 20000,
+            "condition": "good",
+            "useYear": 2,
+            "postTime": "10: 30",
+            "mobileNumber": 19876151,
+            "purchesYear": 2020
+        },
+        {
+            "productName": "BMW Z4",
+            "picture": "https://i.ibb.co/b6hfktb/z4.jpg",
+            "location": "Rangpur",
+            "resalePrice": 15000,
+            "orginalPrice": 22000,
+            "condition": "excellent",
+            "useYear": 1,
+            "postTime": " 11: 30",
+            "mobileNumber": 19876145,
+            "purchesYear": 2021
+        }
+    ]
+},
+{
+    "_id": "637f16051cc0b13cc4d1d574",
+    "productId": 2,
+    "picture": "https://i.ibb.co/Pz1m8Hb/lambo-Logo.jpg",
+    "name": "LAMBORGINI",
+    "product": [{
+            "productName": "Lamborgini Aventator ",
+            "picture": "https://i.ibb.co/Y2FhBmr/Aventator.jpg",
+            "location": "Khulna",
+            "resalePrice": 20000,
+            "orginalPrice": 35000,
+            "condition": "good",
+            "useYear": 2,
+            "postTime": " 12: 30",
+            "mobileNumber": 198761987,
+            "purchesYear": 2020
+        },
+        {
+            "productName": "Lamborgini Huracan",
+            "picture": "https://i.ibb.co/6Bsxhs9/huracan.jpg",
+            "location": "Chittagong",
+            "resalePrice": 25000,
+            "orginalPrice": 40000,
+            "condition": "fair",
+            "useYear": 3,
+            "postTime": "11: 40",
+            "mobileNumber": 19876143,
+            "purchesYear": 2019
+        }
+    ]
+},
+{
+    "_id": "637f1605d72f9ff7947b4a8e",
+    "productId": 3,
+    "picture": "https://i.ibb.co/Y30MfYW/audiLogo.jpg",
+    "name": "AUDI",
+    "product": [{
+            "productName": "Audi R8",
+            "picture": "https://i.ibb.co/QbpqCmB/r8.jpg",
+            "location": "Dhaka",
+            "resalePrice": 15000,
+            "orginalPrice": 20000,
+            "condition": "good",
+            "useYear": 1,
+            "postTime": "10.30",
+            "mobileNumber": 19876167,
+            "purchesYear": 2021
+        },
+        {
+            "productName": "Audi Q8",
+            "picture": "https://i.ibb.co/H7QBWkk/Q8.jpg",
+            "location": "Rajshahi",
+            "resalePrice": 8000,
+            "orginalPrice": 18000,
+            "condition": "good",
+            "useYear": 2,
+            "postTime": "1: 30",
+            "mobileNumber": 19876198,
+            "purchesYear": 2022
+        }
+    ]
+}
+]
