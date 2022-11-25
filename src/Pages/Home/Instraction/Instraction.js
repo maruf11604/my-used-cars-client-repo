@@ -38,7 +38,7 @@ const Instraction = () => {
   ];
   return (
     <div className="py-12">
-      <h2 className="text-3xl mb-4 font-bold text-slate-700">
+      <h2 className="text-3xl mb-8 font-bold text-slate-700">
         How to buy your car with Cars Home?
       </h2>
       <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
