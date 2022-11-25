@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const SignUp = () => {
@@ -10,23 +11,31 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const [signUpError, setSignUpError] = useState("");
   const handleSignUp = (data) => {
     console.log(data);
-
+    setSignUpError("");
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        toast.success("User created successfully");
         const userInfo = {
           displayName: data.name,
         };
 
         updateUser(userInfo)
-          .then(() => {})
+          .then(() => {
+            navigate(from, { replace: true });
+          })
           .catch((err) => console.log(err));
       })
       .catch((error) => {
         console.log(error);
+        setSignUpError(error.message);
       });
   };
 
@@ -99,6 +108,8 @@ const SignUp = () => {
 
           <input value="signup" className="btn mt-3 w-full" type="submit" />
         </form>
+
+        {signUpError && <p className="text-red-600">{signUpError}</p>}
         <p>
           Already have an account?{" "}
           <Link className="text-primary" to="/login">
