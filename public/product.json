@@ -1,5 +1,4 @@
 [{
-    "_id": "637f16050d4e446bc1ed91d1",
     "productId": 1,
     "picture": "https://i.ibb.co/KWGYrsg/bmw-logo.jpg",
     "name": "BMW",
@@ -30,7 +29,6 @@
     ]
 },
 {
-    "_id": "637f16051cc0b13cc4d1d574",
     "productId": 2,
     "picture": "https://i.ibb.co/Pz1m8Hb/lambo-Logo.jpg",
     "name": "LAMBORGINI",
@@ -61,7 +59,6 @@
     ]
 },
 {
-    "_id": "637f1605d72f9ff7947b4a8e",
     "productId": 3,
     "picture": "https://i.ibb.co/Y30MfYW/audiLogo.jpg",
     "name": "AUDI",

@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CategoriesItem = ({ product }) => {
   console.log(product);
-  const { name, picture } = product;
+  const { name, picture, _id: id } = product;
   return (
     <div>
       <div className="card w-full bg-base-100 shadow-xl">
@@ -13,9 +14,12 @@ const CategoriesItem = ({ product }) => {
           <h2 className="card-title">{name}</h2>
 
           <div className="card-actions ">
-            <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0">
-              Buy Now
-            </button>
+            <Link
+              to={`/productOptions/${id}`}
+              className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0"
+            >
+              View More
+            </Link>
           </div>
         </div>
       </div>

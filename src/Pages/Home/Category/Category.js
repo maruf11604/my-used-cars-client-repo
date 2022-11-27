@@ -4,7 +4,7 @@ import CategoriesItem from "./CategoriesItem";
 const Category = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("product.json")
+    fetch("http://localhost:5000/productOptions")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
