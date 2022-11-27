@@ -47,6 +47,20 @@ const SignUp = () => {
         <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="form-control w-full ">
             <label className="label">
+              <span className="label-text">Who are you?Buyer or seller?</span>
+            </label>
+            {/* buyer */}
+            <label className="label">
+              <span className="label-text">Buyer</span>
+              <input {...register("radio")} type="radio" value="A" />
+            </label>
+            {/* seller */}
+            <label className="label">
+              <span className="label-text">Seller</span>
+              <input {...register("radio")} type="radio" value="B" />
+            </label>
+
+            <label className="label">
               <span className="label-text">Name</span>
             </label>
 

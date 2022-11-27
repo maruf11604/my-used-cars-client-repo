@@ -23,10 +23,23 @@ const BookingModal = ({ carView, setCarView }) => {
       mobile,
       meetLocation,
     };
-    console.log(booking);
-    form.reset();
-    setCarView(null);
-    toast.success("The item is booked");
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          setCarView(null);
+          form.reset();
+
+          toast.success("The item is booked");
+        }
+      });
   };
   return (
     <>
@@ -54,14 +67,14 @@ const BookingModal = ({ carView, setCarView }) => {
               type="text"
               name="bname"
               className="input input-bordered w-full "
-              value={user.displayName ? user.displayName : "name not provided"}
+              value={user?.displayName ? user.displayName : "name not provided"}
               disabled
             />
             <input
               type="text"
               name="email"
               className="input input-bordered w-full "
-              value={user.email}
+              value={user?.email}
               disabled
             />
 

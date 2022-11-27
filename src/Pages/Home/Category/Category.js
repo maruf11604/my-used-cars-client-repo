@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
 import CategoriesItem from "./CategoriesItem";
 
 const Category = () => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/productOptions")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+  const { data: products = [] } = useQuery({
+    queryKey: ["productOptions"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/productOptions`);
+      const data = await res.json();
+      return data;
+    },
+  });
+
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
-      {products.map((product) => (
-        <CategoriesItem key={product._id} product={product}></CategoriesItem>
-      ))}
+    <div>
+      <h4 className="font-bold text-center text-slate-800 text-2xl ">
+        All Brands
+      </h4>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
+        {products.map((product) => (
+          <CategoriesItem key={product._id} product={product}></CategoriesItem>
+        ))}
+      </div>
     </div>
   );
 };
