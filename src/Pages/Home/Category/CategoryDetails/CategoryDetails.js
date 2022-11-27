@@ -16,7 +16,9 @@ const CategoryDetails = () => {
           setCarView={setCarView}
         ></CategoryCardInfo>
       ))}
-      {carView && <BookingModal carView={carView}></BookingModal>}
+      {carView && (
+        <BookingModal carView={carView} setCarView={setCarView}></BookingModal>
+      )}
     </div>
   );
 };

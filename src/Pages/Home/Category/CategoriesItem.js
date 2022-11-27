@@ -12,6 +12,7 @@ const CategoriesItem = ({ product }) => {
         </figure>
         <div className="card-body grid justify-center bg-slate-400 ">
           <h2 className="card-title">{name}</h2>
+          <p></p>
 
           <div className="card-actions ">
             <Link
