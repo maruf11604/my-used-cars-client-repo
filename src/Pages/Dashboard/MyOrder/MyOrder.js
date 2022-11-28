@@ -1,19 +1,34 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import Loader from "../../Shared/Loader/Loader";
 
 const MyOrder = () => {
-  const { user } = useContext(AuthContext);
-  const url = `http://localhost:5000/bookings?buyerEmail= ${user?.buyerEmail}`;
-
-  const { data: bookings = [] } = useQuery({
-    queryKey: ["bookings", user?.buyerEmail],
+  const { user, setLoading } = useContext(AuthContext);
+  const url = `http://localhost:5000/bookings?buyeremail=${user?.email}`;
+  console.log(user);
+  if (!user?.email) {
+    return <h1>loading..</h1>;
+  }
+  const { data: bookings = [], isLoading } = useQuery({
+    queryKey: ["bookings", user?.Email],
     queryFn: async () => {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
+
       return data;
+      setLoading(true);
     },
   });
+  if (isLoading) {
+    <Loader></Loader>;
+  }
+
   return (
     <div>
       <h3 className="text-2xl font-bold m-4">My Orders</h3>
@@ -35,8 +50,8 @@ const MyOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((book, index) => (
-              <tr>
+            {bookings?.map((book, index) => (
+              <tr key={index}>
                 <th>
                   <label>
                     <input type="checkbox" className="checkbox" />
@@ -48,7 +63,7 @@ const MyOrder = () => {
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <img
-                          src={book.picture}
+                          src={book?.picture}
                           alt="Avatar Tailwind CSS Component"
                         />
                       </div>
@@ -57,9 +72,9 @@ const MyOrder = () => {
                   </div>
                 </td>
                 <td>
-                  <div className="font-bold">{book.productName}</div>
+                  <div className="font-bold">{book?.productName}</div>
                 </td>
-                <td>{book.price}</td>
+                <td>{book?.price}</td>
                 <th>
                   <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs">
                     pay
