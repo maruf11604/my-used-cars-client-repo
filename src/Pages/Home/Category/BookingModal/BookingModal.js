@@ -9,6 +9,7 @@ const BookingModal = ({ carView, setCarView }) => {
     event.preventDefault();
     const form = event.target;
     const productName = form.pname.value;
+    const picture = form.pic.value;
     const buyerName = form.bname.value;
     const buyerEmail = form.email.value;
     const price = form.rprice.value;
@@ -17,6 +18,7 @@ const BookingModal = ({ carView, setCarView }) => {
 
     const booking = {
       productName,
+      picture,
       buyerName,
       buyerEmail,
       price,
@@ -60,6 +62,15 @@ const BookingModal = ({ carView, setCarView }) => {
                 name="pname"
                 className="input input-bordered w-full "
                 value={carView.productName}
+                disabled
+              />
+            </p>
+            <p>
+              <input
+                type="text"
+                name="pic"
+                className="input input-bordered w-full "
+                value={carView.picture}
                 disabled
               />
             </p>
