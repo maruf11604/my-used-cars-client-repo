@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const {
     register,
@@ -30,6 +30,16 @@ const Login = () => {
         console.log(error.message);
         setLoginError(error.message);
       });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div className="h-[800px] flex justify-center items-center">
@@ -83,7 +93,9 @@ const Login = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">Sign In With Google</button>
+        <button onClick={handleGoogleLogin} className="btn btn-outline w-full">
+          Sign In With Google
+        </button>
       </div>
     </div>
   );

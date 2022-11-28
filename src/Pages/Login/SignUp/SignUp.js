@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const SignUp = () => {
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, googleLogin } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -24,18 +24,63 @@ const SignUp = () => {
         console.log(user);
         toast.success("User created successfully");
         const userInfo = {
+          person: data.radio,
           displayName: data.name,
         };
 
         updateUser(userInfo)
           .then(() => {
-            navigate(from, { replace: true });
+            saveUser(data.radio, data.name, data.email, data.password);
+            saveSeller(data.radio, data.name, data.email, data.password);
           })
           .catch((err) => console.log(err));
       })
       .catch((error) => {
         console.log(error);
         setSignUpError(error.message);
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        saveUser("Buyer", user.displayName, user.email, "");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const saveUser = (person, name, email, password) => {
+    const user = { person, name, email, password };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("save user", data);
+        navigate(from, { replace: true });
+      });
+  };
+
+  const saveSeller = (person, name, email, password) => {
+    const seller = { person, name, email, password };
+    fetch("http://localhost:5000/sellers", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(seller),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("save seller", data);
+        navigate(from, { replace: true });
       });
   };
 
@@ -52,12 +97,12 @@ const SignUp = () => {
             {/* buyer */}
             <label className="label">
               <span className="label-text">Buyer</span>
-              <input {...register("radio")} type="radio" value="A" />
+              <input {...register("radio")} type="radio" value="Buyer" />
             </label>
             {/* seller */}
             <label className="label">
               <span className="label-text">Seller</span>
-              <input {...register("radio")} type="radio" value="B" />
+              <input {...register("radio")} type="radio" value="Seller" />
             </label>
 
             <label className="label">
@@ -131,7 +176,9 @@ const SignUp = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">Sign In With Google</button>
+        <button onClick={handleGoogleLogin} className="btn btn-outline w-full">
+          Sign In With Google
+        </button>
       </div>
     </div>
   );
