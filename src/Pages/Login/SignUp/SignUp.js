@@ -15,10 +15,12 @@ const SignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  const [buttonSeller, setButtonSeller] = useState(null);
+  const [buttonBuyer, setButtonBuyer] = useState(null);
   const [signUpError, setSignUpError] = useState("");
   const [createUserEmail, setCreatedUserEmail] = useState("");
   const [token] = useToken(createUserEmail);
-
+  // console.log(buttonBuyer);
   if (token) {
     navigate("/");
   }
@@ -39,6 +41,7 @@ const SignUp = () => {
         updateUser(userInfo)
           .then(() => {
             saveUser(data.radio, data.name, data.email, data.password);
+
             saveSeller(data.radio, data.name, data.email, data.password);
           })
           .catch((err) => console.log(err));
@@ -72,7 +75,7 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((data) => {
         setCreatedUserEmail(email);
-        // navigate(from, { replace: true });
+        navigate(from, { replace: true });
       });
   };
 
@@ -103,12 +106,12 @@ const SignUp = () => {
               <span className="label-text">Who are you?Buyer or seller?</span>
             </label>
             {/* buyer */}
-            <label className="label">
+            <label onClick={() => setButtonBuyer("Buyer")} className="label">
               <span className="label-text">Buyer</span>
               <input {...register("radio")} type="radio" value="Buyer" />
             </label>
             {/* seller */}
-            <label className="label">
+            <label onClick={() => setButtonSeller("Seller")} className="label">
               <span className="label-text">Seller</span>
               <input {...register("radio")} type="radio" value="Seller" />
             </label>

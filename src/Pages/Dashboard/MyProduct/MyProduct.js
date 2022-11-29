@@ -1,18 +1,20 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthProvider";
-import Loader from "../../Shared/Loader/Loader";
+import ConfirmationModal from "../../Shared/ConfirmationModal/ConfirmationModal";
 
-const MyOrder = () => {
+const MyProduct = () => {
   const { user, setLoading } = useContext(AuthContext);
-  const url = `http://localhost:5000/bookings?buyeremail=${user?.email}`;
-  console.log(user);
-  if (!user?.email) {
-    return <h1>loading..</h1>;
-  }
-  const { data: bookings = [], isLoading } = useQuery({
-    queryKey: ["bookings", user?.Email],
+  const [deletingProduct, setDeletingProduct] = useState(null);
+
+  const url = `http://localhost:5000/addproducts?email=${user?.email}`;
+
+  const closeModal = () => {
+    setDeletingProduct(null);
+  };
+  const { data: myProduct = [], refetch } = useQuery({
+    queryKey: ["myProduct", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
         headers: {
@@ -25,13 +27,26 @@ const MyOrder = () => {
       setLoading(true);
     },
   });
-  if (isLoading) {
-    <Loader></Loader>;
-  }
+
+  const handleDeleteProduct = (product) => {
+    fetch(`http://localhost:5000/addproducts/${product._id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          refetch();
+          toast.success("deleted product successfully");
+        }
+      });
+  };
 
   return (
     <div>
-      <h3 className="text-2xl font-bold m-4">My Orders</h3>
+      <h2 className="text-3xl">My Product</h2>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead className="bg-slate-500">
@@ -46,11 +61,12 @@ const MyOrder = () => {
               <th>Title</th>
               <th>Price</th>
               <th>Action</th>
-              <th>Report</th>
+              <th>validity</th>
+              <th>Advertise</th>
             </tr>
           </thead>
           <tbody>
-            {bookings?.map((book, index) => (
+            {myProduct?.map((book, index) => (
               <tr key={index}>
                 <th>
                   <label>
@@ -72,17 +88,26 @@ const MyOrder = () => {
                   </div>
                 </td>
                 <td>
-                  <div className="font-bold">{book?.productName}</div>
+                  <div className="font-bold">{book?.name}</div>
                 </td>
                 <td>{book?.price}</td>
                 <th>
+                  <label
+                    onClick={() => setDeletingProduct(book)}
+                    htmlFor="confirm-modal"
+                    className="btn btn-error btn-sm"
+                  >
+                    Delete
+                  </label>
+                </th>
+                <th>
                   <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs">
-                    pay
+                    available
                   </button>
                 </th>
                 <th>
                   <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs">
-                    Report
+                    advertise
                   </button>
                 </th>
               </tr>
@@ -90,8 +115,18 @@ const MyOrder = () => {
           </tbody>
         </table>
       </div>
+      {deletingProduct && (
+        <ConfirmationModal
+          title={"are you sure you want to delete?"}
+          message={"If you delete it can not be recover"}
+          closeModal={closeModal}
+          successAction={handleDeleteProduct}
+          successButtonName="delete"
+          productData={deletingProduct}
+        ></ConfirmationModal>
+      )}
     </div>
   );
 };
 
-export default MyOrder;
+export default MyProduct;
