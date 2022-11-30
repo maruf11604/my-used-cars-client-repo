@@ -46,6 +46,23 @@ const Allusers = () => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           toast.success("Make admin successfully");
+          refetch();
+        }
+      });
+  };
+  const handleMakeSeller = (id) => {
+    fetch(`http://localhost:5000/users/seller/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          toast.success("Make seller successfully");
+          refetch();
         }
       });
   };
@@ -61,6 +78,7 @@ const Allusers = () => {
               <th>Email</th>
               <th>Action</th>
               <th>Admin</th>
+              <th>Default</th>
             </tr>
           </thead>
           <tbody>
@@ -88,6 +106,16 @@ const Allusers = () => {
                     </button>
                   )}
                 </td>
+                <th>
+                  {user?.role !== "seller" && (
+                    <button
+                      onClick={() => handleMakeSeller(user._id)}
+                      className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs"
+                    >
+                      Seller
+                    </button>
+                  )}
+                </th>
               </tr>
             ))}
           </tbody>

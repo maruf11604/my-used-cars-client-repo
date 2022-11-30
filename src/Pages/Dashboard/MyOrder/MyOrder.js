@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Loader from "../../Shared/Loader/Loader";
 
@@ -51,7 +52,7 @@ const MyOrder = () => {
           </thead>
           <tbody>
             {bookings?.map((book, index) => (
-              <tr key={index}>
+              <tr key={book._id}>
                 <th>
                   <label>
                     <input type="checkbox" className="checkbox" />
@@ -76,9 +77,16 @@ const MyOrder = () => {
                 </td>
                 <td>{book?.price}</td>
                 <th>
-                  <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs">
-                    pay
-                  </button>
+                  {book.price && !book.paid && (
+                    <Link to={`dashboard/payment/${book._id}`}>
+                      <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs">
+                        pay
+                      </button>
+                    </Link>
+                  )}
+                  {book.price && book.paid && (
+                    <span className="text-primary">paid</span>
+                  )}
                 </th>
                 <th>
                   <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs">
