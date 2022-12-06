@@ -17,6 +17,7 @@ import NotFound from "../Pages/NotFound/NotFound";
 import DisplayError from "../Pages/Shared/DisplayError/DisplayError";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import SellerRoute from "./SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
   {
@@ -72,7 +73,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/addproduct",
-        element: <AddProduct></AddProduct>,
+        element: (
+          <SellerRoute>
+            <AddProduct></AddProduct>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/myproduct",
@@ -80,15 +85,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/sellers",
-        element: <AllSeller></AllSeller>,
+        element: (
+          <AdminRoute>
+            <AllSeller></AllSeller>
+          </AdminRoute>
+        ),
       },
       {
         path: "dashboard/payment/:id",
-        element: (
-          <AdminRoute>
-            <Payment></Payment>
-          </AdminRoute>
-        ),
+        element: <Payment></Payment>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/bookings/${params.id}`),
       },
@@ -101,3 +106,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+// http://localhost:5000/

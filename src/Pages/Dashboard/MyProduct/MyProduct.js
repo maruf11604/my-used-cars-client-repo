@@ -5,13 +5,19 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import ConfirmationModal from "../../Shared/ConfirmationModal/ConfirmationModal";
 
 const MyProduct = () => {
-  const { user, setLoading } = useContext(AuthContext);
+  const { user, setLoading, verified, setAdvertiseadd, booked } =
+    useContext(AuthContext);
+  console.log(booked);
   const [deletingProduct, setDeletingProduct] = useState(null);
 
   const url = `http://localhost:5000/addproducts?email=${user?.email}`;
 
   const closeModal = () => {
     setDeletingProduct(null);
+  };
+
+  const handleAdd = (add) => {
+    setAdvertiseadd(add);
   };
   const { data: myProduct = [], refetch } = useQuery({
     queryKey: ["myProduct", user?.email],
@@ -69,9 +75,19 @@ const MyProduct = () => {
             {myProduct?.map((book, index) => (
               <tr key={index}>
                 <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
+                  {verified._id === user._id ? (
+                    <label>
+                      <input
+                        type="checkbox"
+                        className="checkbox"
+                        checked="checked"
+                      />
+                    </label>
+                  ) : (
+                    <label>
+                      <input type="checkbox" className="checkbox" />
+                    </label>
+                  )}
                 </th>
                 <th>{index + 1}</th>
                 <td>
@@ -106,7 +122,10 @@ const MyProduct = () => {
                   </button>
                 </th>
                 <th>
-                  <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs">
+                  <button
+                    onClick={() => handleAdd(myProduct[index])}
+                    className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs"
+                  >
                     advertise
                   </button>
                 </th>

@@ -190,7 +190,7 @@ const AddProduct = () => {
           />
         </div>
 
-        <input value="signup" className="btn mt-3 w-full" type="submit" />
+        <input value="Add" className="btn mt-3 w-full" type="submit" />
       </form>
     </div>
   );

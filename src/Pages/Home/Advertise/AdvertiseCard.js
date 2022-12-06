@@ -1,19 +1,17 @@
 import React from "react";
 
-const AdvertiseCard = ({ result }) => {
-  console.log(result);
+const AdvertiseCard = ({ addvartise }) => {
+  console.log(addvartise);
   const {
-    productName,
+    name,
     condition,
     location,
-    mobileNumber,
-    orginalPrice,
+    price,
     picture,
-    postTime,
-    purchesYear,
-    resalePrice,
-    useYear,
-  } = result;
+    description,
+    purchaseYear,
+    email,
+  } = addvartise;
   return (
     <div>
       <div className="card w-full bg-base-100 shadow-xl">
@@ -21,7 +19,7 @@ const AdvertiseCard = ({ result }) => {
           <img src={picture} alt="Shoes" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{productName}</h2>
+          <h2 className="card-title">{name}</h2>
           <p>
             Condition: <small className="font-bold">{condition}</small>
           </p>
@@ -29,22 +27,17 @@ const AdvertiseCard = ({ result }) => {
             Location: <small className="font-bold">{location}</small>
           </p>
           <p>
-            Mobile: <small className="font-bold">{mobileNumber}</small>
+            Price: <small className="font-bold">{price}</small>
           </p>
           <p>
-            Original-price: <small className="font-bold">${orginalPrice}</small>
+            Description: <small className="font-bold">${description}</small>
           </p>
           <p>
-            PurchesYear: <small className="font-bold">{purchesYear}</small>
+            PurchesYear: <small className="font-bold">{purchaseYear}</small>
           </p>
+
           <p>
-            Resale-price: <small className="font-bold">${resalePrice}</small>
-          </p>
-          <p>
-            Use: <small className="font-bold">{useYear}</small> years
-          </p>
-          <p>
-            postTime: <small className="font-bold">{postTime}</small>
+            Email: <small className="font-bold">{email}</small>
           </p>
         </div>
       </div>

@@ -3,9 +3,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import AdvertiseCard from "./AdvertiseCard";
 
 const Advertise = () => {
-  const { addvartise } = useContext(AuthContext);
-
-  const results = [addvartise];
+  const { addvartiseadd } = useContext(AuthContext);
 
   return (
     <div>
@@ -13,9 +11,12 @@ const Advertise = () => {
         All Advertise
       </h2>
       <div className="grid lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1  py-6 ">
-        {results?.map((result, index) => (
-          <AdvertiseCard key={index} result={result}></AdvertiseCard>
-        ))}
+        {
+          <AdvertiseCard
+            key={addvartiseadd._id}
+            addvartise={addvartiseadd}
+          ></AdvertiseCard>
+        }
       </div>
     </div>
   );

@@ -15,10 +15,10 @@ const CategoryCardInfo = ({ prod, setCarView }) => {
     useYear,
   } = prod;
   console.log(prod);
-  const handleAdvertise = (prod) => {
-    // console.log(prod);
-    setAdvertise(prod);
-  };
+  // const handleAdvertise = (prod) => {
+  //   // console.log(prod);
+  //   setAdvertise(prod);
+  // };
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <p className="font-bold m-2">Time: {postTime}</p>
@@ -65,14 +65,6 @@ const CategoryCardInfo = ({ prod, setCarView }) => {
               Buy Now
             </Link>
           )}
-          <div>
-            <button
-              onClick={() => handleAdvertise(prod)}
-              className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0"
-            >
-              Advertise
-            </button>
-          </div>
         </div>
       </div>
     </div>

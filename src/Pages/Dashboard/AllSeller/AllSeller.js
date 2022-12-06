@@ -1,10 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { useContext } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import ConfirmationModal from "../../Shared/ConfirmationModal/ConfirmationModal";
 
 const AllSeller = () => {
+  const { verified, setverified } = useContext(AuthContext);
   const [deletingSeller, setDeletingSeller] = useState(null);
+
+  const handlverify = (sel) => {
+    setverified(sel);
+    toast.success("verified successfully");
+  };
+
   const closeModal = () => {
     setDeletingSeller(null);
   };
@@ -83,8 +92,12 @@ const AllSeller = () => {
                   </label>
                 </th>
                 <th>
-                  <button className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs">
-                    Verify
+                  <button
+                    id={index}
+                    onClick={() => handlverify(sellers[index])}
+                    className="btn bg-gradient-to-r from-indigo-500 to-blue-500 border-0 btn-xs"
+                  >
+                    {verified ? <p>verified</p> : <p>verifiy</p>}
                   </button>
                 </th>
               </tr>

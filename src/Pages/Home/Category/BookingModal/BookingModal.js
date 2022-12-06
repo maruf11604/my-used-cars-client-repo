@@ -11,7 +11,7 @@ const BookingModal = ({ carView, setCarView }) => {
     const productName = form.pname.value;
     const picture = form.pic.value;
     const buyerName = form.bname.value;
-    const buyerEmail = form.email.value;
+    const email = form.email.value;
     const price = form.rprice.value;
     const mobile = form.phone.value;
     const meetLocation = form.location.value;
@@ -20,7 +20,7 @@ const BookingModal = ({ carView, setCarView }) => {
       productName,
       picture,
       buyerName,
-      buyerEmail,
+      email,
       price,
       mobile,
       meetLocation,

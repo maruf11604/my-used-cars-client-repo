@@ -6,8 +6,8 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import Loader from "../../Shared/Loader/Loader";
 
 const MyOrder = () => {
-  const { user, setLoading } = useContext(AuthContext);
-  const url = `http://localhost:5000/bookings?buyeremail=${user?.email}`;
+  const { user, setLoading, setBooked } = useContext(AuthContext);
+  const url = `http://localhost:5000/bookings?email=${user?.email}`;
   console.log(user);
   if (!user?.email) {
     return <h1>loading..</h1>;
@@ -21,7 +21,7 @@ const MyOrder = () => {
         },
       });
       const data = await res.json();
-
+      setBooked(data);
       return data;
       setLoading(true);
     },

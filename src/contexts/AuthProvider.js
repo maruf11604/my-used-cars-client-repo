@@ -17,7 +17,9 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [addvartise, setAdvertise] = useState({});
+  const [booked, setBooked] = useState([]);
+  const [addvartiseadd, setAdvertiseadd] = useState({});
+  const [verified, setverified] = useState("verify");
   // const [loading,setLoading]=useState(true)
   const createUser = (email, password) => {
     setLoading(true);
@@ -58,11 +60,16 @@ const AuthProvider = ({ children }) => {
     logOut,
     updateUser,
     loading,
-    addvartise,
-    setAdvertise,
+    addvartiseadd,
+    setAdvertiseadd,
     googleLogin,
     setLoading,
+    setverified,
+    verified,
+    setBooked,
+    booked
   };
+  console.log(addvartiseadd);
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
