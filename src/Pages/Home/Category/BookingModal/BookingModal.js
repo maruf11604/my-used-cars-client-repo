@@ -25,13 +25,16 @@ const BookingModal = ({ carView, setCarView }) => {
       mobile,
       meetLocation,
     };
-    fetch("http://localhost:5000/bookings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(booking),
-    })
+    fetch(
+      "https://used-products-resale-market-server-assignment.vercel.app/bookings",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(booking),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
