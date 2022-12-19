@@ -7,7 +7,7 @@ import Loader from "../../Shared/Loader/Loader";
 
 const MyOrder = () => {
   const { user, setLoading, setBooked } = useContext(AuthContext);
-  const url = `https://used-products-resale-market-server-assignment.vercel.app/bookings?email=${user?.email}`;
+  const url = `http://localhost:5000/bookings?email=${user?.email}`;
   console.log(user);
   if (!user?.email) {
     return <h1>loading..</h1>;
@@ -23,7 +23,6 @@ const MyOrder = () => {
       const data = await res.json();
       setBooked(data);
       return data;
-      setLoading(true);
     },
   });
   if (isLoading) {

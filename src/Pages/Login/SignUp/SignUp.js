@@ -65,16 +65,13 @@ const SignUp = () => {
 
   const saveUser = (person, name, email, password) => {
     const user = { person, name, email, password };
-    fetch(
-      "https://used-products-resale-market-server-assignment.vercel.app/users",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }
-    )
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
       .then((res) => res.json())
       .then((data) => {
         setCreatedUserEmail(email);
@@ -84,16 +81,13 @@ const SignUp = () => {
 
   const saveSeller = (person, name, email, password) => {
     const seller = { person, name, email, password };
-    fetch(
-      "https://used-products-resale-market-server-assignment.vercel.app/sellers",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(seller),
-      }
-    )
+    fetch("http://localhost:5000/sellers", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(seller),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log("save seller", data);

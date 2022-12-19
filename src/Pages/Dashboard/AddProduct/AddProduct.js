@@ -32,17 +32,14 @@ const AddProduct = () => {
             purchaseYear: data.yearPurchase,
             picture: imgData.data.url,
           };
-          fetch(
-            "https://used-products-resale-market-server-assignment.vercel.app/addproducts",
-            {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-              },
-              body: JSON.stringify(product),
-            }
-          )
+          fetch("http://localhost:5000/addproducts", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(product),
+          })
             .then((res) => res.json())
             .then((result) => {
               console.log(result);

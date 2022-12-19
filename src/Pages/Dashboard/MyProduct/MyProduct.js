@@ -10,7 +10,7 @@ const MyProduct = () => {
   console.log(booked);
   const [deletingProduct, setDeletingProduct] = useState(null);
 
-  const url = `https://used-products-resale-market-server-assignment.vercel.app/addproducts?email=${user?.email}`;
+  const url = `http://localhost:5000/addproducts?email=${user?.email}`;
 
   const closeModal = () => {
     setDeletingProduct(null);
@@ -30,20 +30,16 @@ const MyProduct = () => {
       const data = await res.json();
 
       return data;
-      setLoading(true);
     },
   });
 
   const handleDeleteProduct = (product) => {
-    fetch(
-      `https://used-products-resale-market-server-assignment.vercel.app/addproducts/${product._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
+    fetch(`http://localhost:5000/addproducts/${product._id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {

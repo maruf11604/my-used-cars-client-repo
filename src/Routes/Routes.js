@@ -41,9 +41,7 @@ const router = createBrowserRouter([
         path: "/productOptions/:id",
         element: <CategoryDetails></CategoryDetails>,
         loader: ({ params }) =>
-          fetch(
-            `https://used-products-resale-market-server-assignment.vercel.app/productOptions/${params.id}`
-          ),
+          fetch(`http://localhost:5000/productOptions/${params.id}`),
       },
 
       {
@@ -97,9 +95,7 @@ const router = createBrowserRouter([
         path: "dashboard/payment/:id",
         element: <Payment></Payment>,
         loader: ({ params }) =>
-          fetch(
-            `https://used-products-resale-market-server-assignment.vercel.app/bookings/${params.id}`
-          ),
+          fetch(`http://localhost:5000/bookings/${params.id}`),
       },
     ],
   },
@@ -110,4 +106,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
-// https://used-products-resale-market-server-assignment.vercel.app/
+// http://localhost:5000/
