@@ -83,7 +83,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/myproduct",
-        element: <MyProduct></MyProduct>,
+        element: (
+          <SellerRoute>
+            <MyProduct></MyProduct>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/sellers",
